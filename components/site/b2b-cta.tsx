@@ -47,7 +47,7 @@ export function B2BCta() {
                 Hablemos por WhatsApp
               </CtaLink>
               <CtaLink
-                href="mailto:ventas@temacalcos.com.ar?subject=Presupuesto%20por%20mayor"
+                href="mailto:ventas@uknowcalcos.com.ar?subject=Presupuesto%20por%20mayor"
                 size="lg"
                 variant="outline"
                 className="border-ink text-ink hover:bg-ink hover:text-paper"

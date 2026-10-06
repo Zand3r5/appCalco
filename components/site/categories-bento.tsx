@@ -92,7 +92,7 @@ export function CategoriesBento() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <BentoLink href="#nuevo" className="min-h-[240px] bg-pop text-ink">
+          <BentoLink href="#de-a-uno" className="min-h-[240px] bg-pop text-ink">
             <StickerArt
               kind="sun"
               className="absolute -top-6 -right-6 w-36 transition-transform duration-700 ease-out group-hover:rotate-90"

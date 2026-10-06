@@ -15,7 +15,7 @@ export function HowItWorks() {
           Sin programas raros ni archivos complicados. Nos mandás lo que tengas y nuestro equipo lo deja listo para
           imprimir, con una prueba digital antes de producir.
         </p>
-        <CtaLink href="#nuevo" className="mt-8">
+        <CtaLink href="#de-a-uno" className="mt-8">
           Empezar mi diseño
           <ArrowRight aria-hidden />
         </CtaLink>

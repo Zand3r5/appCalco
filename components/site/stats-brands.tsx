@@ -33,7 +33,7 @@ export function StatsBrands() {
     <section aria-labelledby="stats-title" className="pb-20 sm:pb-28">
       <div className="shell">
         <h2 id="stats-title" className="sr-only">
-          Tema Calcos en números
+          Uknow Calcos en números
         </h2>
         <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {STATS.map((stat) => (

@@ -26,25 +26,29 @@ function ProductCard({ product }: { product: Product }) {
   }, [added])
 
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-border bg-card p-2.5 transition-shadow duration-200 hover:shadow-[0_24px_40px_-28px_rgb(0_0_0/0.45)]">
+    <article className="group relative flex h-full flex-col rounded-md border-2 border-ink bg-card shadow-hard transition-transform duration-200 ease-out hover:-translate-y-1 dark:border-border">
+      <span aria-hidden className="tape -top-3 left-1/2 z-10 -translate-x-1/2 rotate-[-3deg]" />
       <div
-        className="relative grid aspect-square place-items-center overflow-hidden rounded-[18px] bg-[radial-gradient(rgb(0_0_0/0.06)_1px,transparent_1px)] [background-size:14px_14px]"
+        className="bg-concrete relative grid aspect-square place-items-center overflow-hidden rounded-t-[4px] border-b-2 border-ink dark:border-border"
         style={{ backgroundColor: product.tint }}
       >
         {product.badge && (
-          <span className="absolute top-3 left-3 rounded-full bg-ink px-2.5 py-1 text-[11px] font-semibold text-paper">
+          <span className="absolute top-3 left-3 -rotate-3 rounded-sm bg-pop px-2 py-0.5 font-display text-xs tracking-wide text-ink uppercase">
             {product.badge}
           </span>
         )}
         <StickerArt
           kind={product.art}
           title={product.name}
-          className="w-[62%] transition-transform duration-300 ease-out group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:-rotate-6"
+          className="w-[64%] transition-transform duration-300 ease-out group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:-rotate-6"
         />
+        <span className="absolute right-2.5 bottom-2.5 rotate-2 rounded-sm bg-paper px-2 py-1 font-mono text-[11px] font-semibold text-ink shadow-[2px_2px_0_0_var(--ink)] sm:text-xs">
+          {priceLabel(product)}
+        </span>
       </div>
-      <div className="flex flex-1 flex-col px-1.5 pt-3 pb-1">
-        <h3 className="font-display text-base leading-tight font-bold sm:text-lg">{product.name}</h3>
-        <p className="mt-1 font-mono text-sm text-muted-foreground">{priceLabel(product)}</p>
+      <div className="flex flex-1 flex-col px-3 pt-3 pb-3">
+        <h3 className="font-display text-lg leading-[1.05] uppercase sm:text-xl">{product.name}</h3>
+        <p className="mt-1 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">Vinilo troquelado · 7 cm</p>
         <div className="mt-auto pt-4">
           <button
             type="button"
@@ -62,7 +66,7 @@ function ProductCard({ product }: { product: Product }) {
               className="flex items-center gap-1.5"
             >
               {added ? <Check className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
-              {added ? "¡Agregado!" : "Agregar"}
+              {added ? "¡Sumado!" : "Sumar"}
             </motion.span>
           </button>
         </div>
@@ -113,28 +117,35 @@ function CartToast() {
   )
 }
 
-export function NewArrivals() {
+// Slight, repeating tilt so the grid reads like stickers slapped on a wall.
+const TILTS = ["-rotate-1", "rotate-[0.6deg]", "rotate-0", "rotate-1"] as const
+
+export function SinglesSection() {
   return (
-    <section id="nuevo" aria-labelledby="nuevo-title" className="shell py-20 sm:py-28">
+    <section id="de-a-uno" aria-labelledby="de-a-uno-title" className="shell py-20 sm:py-28">
       <Reveal className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">Recién salidos</p>
-          <h2 id="nuevo-title" className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Lo nuevo.
+          <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">Calcos sueltos</p>
+          <h2 id="de-a-uno-title" className="mt-3 font-display text-5xl leading-[0.95] sm:text-7xl">
+            De a{" "}
+            <span className="inline-block -rotate-3 rounded-md bg-brand px-[0.12em] text-ink shadow-hard">uno.</span>
           </h2>
+          <p className="mt-4 max-w-md text-muted-foreground">
+            ¿No necesitás la plancha entera? Elegí tus favoritos y armá tu propio mix: se venden por unidad.
+          </p>
         </div>
         <a
           href="#catalogo"
           className="group inline-flex items-center gap-1.5 self-start rounded-full text-sm font-semibold underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:self-auto"
         >
-          Ver todo el catálogo
-          <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+          <ArrowRight className="size-4 rotate-180 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden />
+          Volver a las planchas
         </a>
       </Reveal>
 
-      <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+      <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4">
         {products.map((product, i) => (
-          <li key={product.id}>
+          <li key={product.id} className={TILTS[i % TILTS.length]}>
             <Reveal delay={(i % 4) * 0.06} className="h-full">
               <ProductCard product={product} />
             </Reveal>

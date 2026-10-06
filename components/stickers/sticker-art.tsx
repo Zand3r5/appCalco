@@ -12,8 +12,17 @@ export type StickerKind =
   | "bolt"
   | "smiley"
   | "logo"
+  | "spray"
+  | "crown"
+  | "flame"
+  | "eye"
+  | "star"
+  | "tag"
+  | "drip"
+  | "skate"
 
 const INK = "#1d1f26"
+const LIME = "#c6f432"
 const STROKE = { stroke: INK, strokeWidth: 5, strokeLinejoin: "round" as const, strokeLinecap: "round" as const }
 const DISPLAY_FONT = "var(--font-display), system-ui, sans-serif"
 
@@ -174,20 +183,142 @@ const ART: Record<StickerKind, ReactNode> = {
       </text>
     </g>
   ),
+  spray: (
+    <g>
+      {[
+        [138, 30, 5],
+        [154, 20, 3],
+        [158, 40, 6],
+        [174, 30, 4],
+        [176, 52, 3],
+      ].map(([cx, cy, r]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} fill={LIME} stroke={INK} strokeWidth="2.5" />
+      ))}
+      <g transform="rotate(-14 100 110)">
+        <rect x="64" y="62" width="68" height="120" rx="14" fill="#ff5a5f" {...STROKE} />
+        <rect x="64" y="96" width="68" height="46" fill={INK} />
+        <text x="98" y="130" textAnchor="middle" fontFamily={DISPLAY_FONT} fontSize="28" fill={LIME}>
+          UK
+        </text>
+        <path d="M70 64 Q98 30 126 64 Z" fill="#c9ced6" {...STROKE} />
+        <rect x="88" y="28" width="20" height="16" rx="4" fill={INK} />
+        <path d="M78 156 V170" stroke="#fff" strokeWidth="6" strokeLinecap="round" opacity="0.55" />
+      </g>
+    </g>
+  ),
+  crown: (
+    <g>
+      <path d="M32 150 L22 64 L68 102 L100 42 L132 102 L178 64 L168 150 Z" fill="#ffd23f" {...STROKE} />
+      <rect x="26" y="144" width="148" height="28" rx="8" fill="#ff9f1c" {...STROKE} />
+      {[
+        [22, 60],
+        [100, 38],
+        [178, 60],
+      ].map(([cx, cy]) => (
+        <circle key={cx} cx={cx} cy={cy} r="11" fill="#ff5a5f" {...STROKE} />
+      ))}
+      <circle cx="100" cy="118" r="13" fill="#6cc3f0" {...STROKE} />
+    </g>
+  ),
+  flame: (
+    <g>
+      <path
+        d="M100 16 C122 58 164 76 160 126 C158 162 132 186 100 186 C68 186 40 162 40 128 C40 98 62 82 70 58 C80 82 86 90 94 94 C90 66 88 40 100 16 Z"
+        fill="#ff5a1f"
+        {...STROKE}
+      />
+      <path
+        d="M100 94 C112 118 132 126 130 150 C128 170 116 180 100 180 C84 180 70 168 70 150 C70 134 82 128 86 114 C92 126 96 128 98 128 C96 114 96 104 100 94 Z"
+        fill="#ffd23f"
+        {...STROKE}
+        strokeWidth={4}
+      />
+    </g>
+  ),
+  eye: (
+    <g>
+      <path d="M40 81 L28 66 M66 68 L58 50 M100 62 V42 M134 68 L142 50 M160 81 L172 66" fill="none" {...STROKE} />
+      <path d="M14 100 Q100 24 186 100 Q100 176 14 100 Z" fill="#ffffff" {...STROKE} />
+      <circle cx="100" cy="100" r="36" fill={LIME} {...STROKE} />
+      <circle cx="100" cy="100" r="16" fill={INK} />
+      <circle cx="90" cy="88" r="7" fill="#ffffff" />
+    </g>
+  ),
+  star: (
+    <g>
+      <polygon points={radial(5, 44, 90)} fill={LIME} {...STROKE} />
+      <Face y={104} />
+    </g>
+  ),
+  tag: (
+    <g transform="rotate(-8 100 100)">
+      {[
+        [64, 30],
+        [104, 46],
+        [142, 22],
+      ].map(([x, len]) => (
+        <g key={x}>
+          <path d={`M${x} 112 V${112 + len}`} stroke={INK} strokeWidth="15" strokeLinecap="round" />
+          <path d={`M${x} 112 V${112 + len}`} stroke="#ff5a5f" strokeWidth="7" strokeLinecap="round" />
+        </g>
+      ))}
+      <text
+        x="100"
+        y="122"
+        textAnchor="middle"
+        fontFamily={DISPLAY_FONT}
+        fontSize="64"
+        fill="#ff5a5f"
+        stroke={INK}
+        strokeWidth="10"
+        strokeLinejoin="round"
+        paintOrder="stroke"
+      >
+        UKNOW
+      </text>
+      <polygon points={radial(4, 4, 14, 172, 52)} fill={LIME} stroke={INK} strokeWidth="3" />
+      <polygon points={radial(4, 3, 10, 26, 62)} fill={LIME} stroke={INK} strokeWidth="3" />
+    </g>
+  ),
+  drip: (
+    <g>
+      <path
+        d="M24 96 A76 76 0 0 1 176 96 L176 120 Q176 132 166 132 Q158 132 158 144 L158 166 Q158 180 146 180 Q134 180 134 166 L134 150 Q134 140 124 140 Q114 140 114 152 L114 158 Q114 170 104 170 Q94 170 94 158 L94 146 Q94 136 82 136 Q70 136 70 150 L70 176 Q70 188 58 188 Q46 188 46 176 L46 142 Q46 132 36 132 Q24 132 24 120 Z"
+        fill={LIME}
+        {...STROKE}
+      />
+      <path d="M62 68 L82 88 M82 68 L62 88 M118 68 L138 88 M138 68 L118 88" fill="none" {...STROKE} strokeWidth={7} />
+      <path d="M66 106 Q100 134 134 106" fill="none" {...STROKE} strokeWidth={7} />
+    </g>
+  ),
+  skate: (
+    <g transform="rotate(-32 100 100)">
+      <rect x="40" y="122" width="26" height="9" rx="3" fill={INK} />
+      <rect x="134" y="122" width="26" height="9" rx="3" fill={INK} />
+      <circle cx="53" cy="140" r="13" fill="#ffd23f" {...STROKE} />
+      <circle cx="147" cy="140" r="13" fill="#ffd23f" {...STROKE} />
+      <rect x="14" y="74" width="172" height="52" rx="26" fill="#ff5a5f" {...STROKE} />
+      <text x="100" y="112" textAnchor="middle" fontFamily={DISPLAY_FONT} fontSize="30" letterSpacing="2" fill="#ffffff">
+        BARRIO
+      </text>
+    </g>
+  ),
 }
 
 type StickerArtProps = Omit<SVGProps<SVGSVGElement>, "children"> & {
   kind: StickerKind
   title?: string
+  /** Lift shadow; turn off when the sticker is printed flat on a sheet. */
+  shadow?: boolean
 }
 
-export function StickerArt({ kind, title, className, ...props }: StickerArtProps) {
+export function StickerArt({ kind, title, shadow = true, className, ...props }: StickerArtProps) {
   return (
     <svg
       viewBox="0 0 200 200"
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
-      className={cn("sticker-shadow overflow-visible", className)}
+      className={cn(shadow && "sticker-shadow", "overflow-visible", className)}
       {...props}
     >
       {title ? <title>{title}</title> : null}

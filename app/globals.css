@@ -54,58 +54,60 @@
   }
 }
 
-/* Paper + ink palette with an Argentine celeste accent */
+/* Street palette: concrete, marker ink, acid lime and safety orange */
 :root {
-  --paper: oklch(0.975 0.016 85);
-  --ink: oklch(0.19 0.012 260);
+  --paper: oklch(0.955 0.004 95);
+  --ink: oklch(0.17 0.004 260);
   --background: var(--paper);
   --foreground: var(--ink);
-  --card: oklch(0.995 0.006 85);
+  --card: oklch(0.99 0.002 95);
   --card-foreground: var(--ink);
-  --popover: oklch(0.995 0.006 85);
+  --popover: oklch(0.99 0.002 95);
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--paper);
-  --brand: oklch(0.76 0.12 232);
+  --brand: oklch(0.9 0.2 126);
   --brand-foreground: var(--ink);
-  --pop: oklch(0.9 0.17 98);
-  --secondary: oklch(0.94 0.02 85);
+  --pop: oklch(0.7 0.2 42);
+  --secondary: oklch(0.92 0.004 95);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.94 0.018 85);
-  --muted-foreground: oklch(0.45 0.015 260);
-  --accent: oklch(0.93 0.04 232);
+  --muted: oklch(0.92 0.004 95);
+  --muted-foreground: oklch(0.43 0.006 260);
+  --accent: oklch(0.93 0.07 126);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.19 0.012 260 / 12%);
-  --input: oklch(0.19 0.012 260 / 18%);
-  --ring: oklch(0.6 0.14 232);
-  --grid-line: oklch(0.19 0.012 260 / 6%);
-  --radius: 0.875rem;
+  --border: oklch(0.17 0.004 260 / 14%);
+  --input: oklch(0.17 0.004 260 / 20%);
+  --ring: oklch(0.62 0.17 136);
+  --grid-line: oklch(0.17 0.004 260 / 6%);
+  --grain-opacity: 0.08;
+  --radius: 0.4rem;
 }
 
 .dark {
-  --background: oklch(0.17 0.012 260);
-  --foreground: oklch(0.96 0.014 85);
-  --card: oklch(0.215 0.014 260);
-  --card-foreground: oklch(0.96 0.014 85);
-  --popover: oklch(0.215 0.014 260);
-  --popover-foreground: oklch(0.96 0.014 85);
-  --primary: oklch(0.96 0.014 85);
-  --primary-foreground: oklch(0.17 0.012 260);
-  --brand: oklch(0.8 0.12 232);
-  --brand-foreground: oklch(0.17 0.012 260);
-  --pop: oklch(0.88 0.16 98);
-  --secondary: oklch(0.26 0.014 260);
-  --secondary-foreground: oklch(0.96 0.014 85);
-  --muted: oklch(0.25 0.014 260);
-  --muted-foreground: oklch(0.74 0.015 85);
-  --accent: oklch(0.3 0.05 232);
-  --accent-foreground: oklch(0.96 0.014 85);
+  --background: oklch(0.155 0.004 260);
+  --foreground: oklch(0.95 0.004 95);
+  --card: oklch(0.205 0.005 260);
+  --card-foreground: oklch(0.95 0.004 95);
+  --popover: oklch(0.205 0.005 260);
+  --popover-foreground: oklch(0.95 0.004 95);
+  --primary: oklch(0.95 0.004 95);
+  --primary-foreground: oklch(0.155 0.004 260);
+  --brand: oklch(0.9 0.2 126);
+  --brand-foreground: oklch(0.155 0.004 260);
+  --pop: oklch(0.72 0.19 42);
+  --secondary: oklch(0.25 0.005 260);
+  --secondary-foreground: oklch(0.95 0.004 95);
+  --muted: oklch(0.24 0.005 260);
+  --muted-foreground: oklch(0.72 0.006 95);
+  --accent: oklch(0.3 0.06 126);
+  --accent-foreground: oklch(0.95 0.004 95);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 11%);
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.8 0.12 232);
+  --ring: oklch(0.9 0.2 126);
   --grid-line: oklch(1 0 0 / 5%);
+  --grain-opacity: 0.12;
 }
 
 @layer base {
@@ -118,6 +120,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Poster type ships a single heavy weight, so never synthesize bold */
+  h1,
+  h2,
+  .font-display,
+  svg text {
+    font-synthesis: none;
+  }
+  h1,
+  h2 {
+    text-transform: uppercase;
   }
   ::selection {
     background: var(--pop);
@@ -140,12 +153,39 @@
 }
 
 @layer utilities {
-  /* Cutting-mat grid used behind the hero */
-  .bg-cutting-mat {
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 32px 32px;
+  /* Concrete wall: fine grain noise layered under the element's content */
+  .bg-concrete {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-concrete::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Strip of masking tape; the caller positions and rotates it */
+  .tape {
+    position: absolute;
+    height: 1.4rem;
+    width: 4.5rem;
+    background: oklch(0.93 0.03 90 / 0.82);
+    box-shadow: 0 1px 2px oklch(0 0 0 / 0.18);
+    clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 2% 96%, 0 52%);
+  }
+  /* Hard offset shadow, like a poster pasted slightly off the wall */
+  .shadow-hard {
+    box-shadow: 5px 5px 0 0 var(--ink);
+  }
+  .dark .shadow-hard {
+    box-shadow: 5px 5px 0 0 var(--brand);
+  }
+  /* Thin kiss-cut line around a sticker printed flat on its backing sheet */
+  .kiss-cut {
+    filter: drop-shadow(0 0 0.6px oklch(0 0 0 / 0.55)) drop-shadow(0 1.5px 1.5px oklch(0 0 0 / 0.12));
   }
   /* Die-cut sticker lift shadow */
   .sticker-shadow {

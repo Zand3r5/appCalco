@@ -6,7 +6,7 @@ import { Faq } from "@/components/site/faq";
 import { FeaturesStrip } from "@/components/site/features-strip";
 import { Hero } from "@/components/site/hero";
 import { HowItWorks } from "@/components/site/how-it-works";
-import { NewArrivals } from "@/components/site/new-arrivals";
+import { SinglesSection } from "@/components/site/singles";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { StatsBrands } from "@/components/site/stats-brands";
@@ -22,9 +22,9 @@ export default function Home() {
         <Hero />
         <FeaturesStrip />
         <CarouselSection />
+        <SinglesSection />
         <CategoriesBento />
         <HowItWorks />
-        <NewArrivals />
         <StatsBrands />
         <Testimonials />
         <B2BCta />

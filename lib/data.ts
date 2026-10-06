@@ -5,28 +5,31 @@ export const WHATSAPP_URL = "https://wa.me/5491100000000"
 const unsplash = (id: string, size = 600) =>
   `https://images.unsplash.com/photo-${id}?w=${size}&h=${size}&fit=crop&auto=format&q=75`
 
-export type CarouselCard = {
-  src: string
-  alt: string
-  title: string
-  tag: string
+export type Sheet = {
+  id: string
+  code: string
+  name: string
+  vibe: string
+  /** Stickers printed on the sheet, biggest first. The sheet layout fits up to 7. */
+  stickers: StickerKind[]
+  price: number
+  /** Backing paper color behind the kiss-cut stickers. */
+  backing: string
+  /** Dark backing: the printed label switches to white ink. */
+  dark?: boolean
 }
 
-export const carouselCards: CarouselCard[] = [
-  { src: unsplash("1625768376503-68d2495d78c5"), alt: "Pared cubierta de stickers variados", title: "Sticker bomb", tag: "Planchas" },
-  { src: unsplash("1633533452206-8ab246b00e30"), alt: "Stickers sobre fondo amarillo", title: "Pack amarillo", tag: "Packs" },
-  { src: unsplash("1540651810471-5699df74834f"), alt: "Colección de stickers de colores", title: "Colección color", tag: "Catálogo" },
-  { src: unsplash("1572950947476-26a6e4111e80"), alt: "Stickers de colores surtidos", title: "Mix ilustrado", tag: "Catálogo" },
-  { src: unsplash("1621252756235-7f37e5e5125e"), alt: "Stickers con diseños variados", title: "Diseños propios", tag: "Personalizados" },
-  { src: unsplash("1500576992153-0271099def59"), alt: "Persona sosteniendo un sticker que dice Hello", title: "Hello!", tag: "Troquelados" },
-  { src: unsplash("1589384267710-7a170981ca78"), alt: "Stickers de corazones y flores", title: "Corazones y flores", tag: "Edición limitada" },
-  { src: unsplash("1543123452-278551b0e9a7"), alt: "Lote de stickers surtidos", title: "Lote surtido", tag: "Por mayor" },
-  { src: unsplash("1583225214464-9296029427aa"), alt: "Stickers pegados en una pared blanca", title: "Muro de calcos", tag: "Planchas" },
-  { src: unsplash("1552959988-b94b76838365"), alt: "Stickers coloridos sobre pared oscura", title: "Noche de calcos", tag: "Catálogo" },
-  { src: unsplash("1714859100552-3e432e8f3981"), alt: "Notebook cubierta de stickers", title: "Tu notebook", tag: "Personalizados" },
-  { src: unsplash("1754528770513-cf982e8f4ba1"), alt: "Pared cubierta con muchos stickers distintos", title: "Street collage", tag: "Por mayor" },
-  { src: unsplash("1596917441632-db1cfd662a5a"), alt: "Sticker de carita feliz en un semáforo", title: "Carita feliz", tag: "Troquelados" },
-  { src: unsplash("1649194791077-9e5721bcc10b"), alt: "Stickers pegados en el costado de un edificio", title: "Calle y vinilo", tag: "Exterior" },
+export const sheets: Sheet[] = [
+  { id: "barrio", code: "001", name: "Barrio", vibe: "Street", stickers: ["tag", "spray", "crown", "drip", "star", "bolt", "eye"], price: 4900, backing: "#f4f4f1" },
+  { id: "argenta", code: "002", name: "Argenta", vibe: "Clásicos", stickers: ["mate", "che", "sun", "smiley", "heart", "bolt"], price: 4900, backing: "#eef6fb" },
+  { id: "fuego", code: "003", name: "Fuego", vibe: "Street", stickers: ["flame", "eye", "drip", "crown", "star", "spray", "bolt"], price: 4900, backing: "#1d1f26", dark: true },
+  { id: "primavera", code: "004", name: "Primavera", vibe: "Edición limitada", stickers: ["flower", "butterfly", "sun", "heart", "star", "smiley"], price: 5600, backing: "#fdf0f5" },
+  { id: "skate", code: "005", name: "Skate Club", vibe: "Street", stickers: ["skate", "flame", "tag", "eye", "star", "spray", "drip"], price: 4900, backing: "#f4f4f1" },
+  { id: "todo-bien", code: "006", name: "Todo Bien", vibe: "Buena onda", stickers: ["smiley", "drip", "heart", "che", "flower", "bolt"], price: 4900, backing: "#fff8df" },
+  { id: "crew", code: "007", name: "Crew", vibe: "Street", stickers: ["crown", "tag", "spray", "che", "eye", "flame", "star"], price: 4900, backing: "#1d1f26", dark: true },
+  { id: "mate-calle", code: "008", name: "Mate y Calle", vibe: "Clásicos", stickers: ["mate", "spray", "tag", "sun", "drip", "crown"], price: 4900, backing: "#f1f7ea" },
+  { id: "love", code: "009", name: "Love Bomb", vibe: "Buena onda", stickers: ["heart", "butterfly", "flower", "star", "smiley", "eye"], price: 4900, backing: "#fff1ef" },
+  { id: "tu-marca", code: "010", name: "Tu Marca", vibe: "Personalizada", stickers: ["logo", "badge24", "tag", "star", "bolt", "heart"], price: 7900, backing: "#f4f4f1" },
 ]
 
 export const categoryImages = {
@@ -46,14 +49,18 @@ export type Product = {
 }
 
 export const products: Product[] = [
-  { id: "sol", name: "Sol Suncatcher Primavera", art: "sun", priceFrom: 3500, badge: "Nuevo", tint: "oklch(0.93 0.09 90)" },
+  { id: "tag", name: "Tag Uknow", art: "tag", priceFrom: 1740, badge: "Top ventas", tint: "oklch(0.3 0.01 260)" },
+  { id: "spray", name: "Lata de Aerosol", art: "spray", priceFrom: 1570, priceTo: 1740, badge: "Nuevo", tint: "oklch(0.9 0.12 126)" },
+  { id: "drip", name: "Carita Chorreada", art: "drip", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.86 0.02 260)" },
+  { id: "corona", name: "Corona del Barrio", art: "crown", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.3 0.01 260)" },
+  { id: "fuego", name: "Fuego", art: "flame", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.92 0.06 80)" },
+  { id: "ojo", name: "Ojo que Todo lo Ve", art: "eye", priceFrom: 1570, priceTo: 1740, badge: "Nuevo", tint: "oklch(0.72 0.17 42)" },
+  { id: "skate", name: "Skate Barrio", art: "skate", priceFrom: 1740, tint: "oklch(0.88 0.04 230)" },
+  { id: "estrella", name: "Estrella Ácida", art: "star", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.3 0.01 260)" },
   { id: "mate", name: "Mate Amargo", art: "mate", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.92 0.06 140)" },
-  { id: "che", name: "¡Che! Bubble", art: "che", priceFrom: 1570, priceTo: 1740, badge: "Top ventas", tint: "oklch(0.92 0.06 230)" },
-  { id: "flor", name: "Flor Suncatcher", art: "flower", priceFrom: 3500, tint: "oklch(0.93 0.06 350)" },
-  { id: "mariposa", name: "Mariposa Suncatcher", art: "butterfly", priceFrom: 3500, badge: "Nuevo", tint: "oklch(0.92 0.06 300)" },
-  { id: "corazon", name: "Corazón Amor Eterno", art: "heart", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.93 0.06 25)" },
-  { id: "rayo", name: "Re Piola", art: "bolt", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.94 0.08 100)" },
-  { id: "smile", name: "Carita Todo Bien", art: "smiley", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.93 0.07 75)" },
+  { id: "che", name: "¡Che! Bubble", art: "che", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.92 0.04 230)" },
+  { id: "rayo", name: "Re Piola", art: "bolt", priceFrom: 1570, priceTo: 1740, tint: "oklch(0.3 0.01 260)" },
+  { id: "sol", name: "Sol Suncatcher", art: "sun", priceFrom: 3500, badge: "Edición limitada", tint: "oklch(0.93 0.07 90)" },
 ]
 
 export const steps = [
@@ -88,8 +95,8 @@ export const faqs = [
 export const navLinks = [
   { label: "Personalizados", href: "#personalizados" },
   { label: "Por mayor", href: "#empresas" },
-  { label: "Catálogo", href: "#catalogo" },
-  { label: "Lo nuevo", href: "#nuevo" },
+  { label: "Planchas", href: "#catalogo" },
+  { label: "De a uno", href: "#de-a-uno" },
   { label: "Preguntas", href: "#faq" },
 ] as const
 

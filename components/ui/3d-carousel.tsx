@@ -1,6 +1,6 @@
-﻿"use client"
+"use client"
 
-import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react"
 import {
   AnimatePresence,
   animate,
@@ -10,7 +10,6 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "framer-motion"
-import Image from "next/image"
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -32,10 +31,13 @@ export function useMediaQuery(query: string, defaultValue = false): boolean {
 }
 
 export type ThreeDCarouselCard = {
-  src: string
-  alt: string
+  id: string
   title: string
   tag?: string
+  /** Secondary line in the detail view, e.g. price. */
+  meta?: string
+  /** Rendered on the cylinder face and, larger, in the detail view. */
+  content: ReactNode
 }
 
 const AUTO_ROTATE_DEG_PER_MS = 0.006
@@ -78,8 +80,8 @@ const Cylinder = memo(function Cylinder({ cards, rotation, onSelect, onPanStart,
       >
         {cards.map((card, i) => (
           <div
-            key={card.src}
-            className="absolute flex h-full origin-center items-center justify-center p-2"
+            key={card.id}
+            className="absolute flex h-full origin-center items-center justify-center p-2.5"
             style={{
               width: `${faceWidth}px`,
               transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
@@ -91,17 +93,10 @@ const Cylinder = memo(function Cylinder({ cards, rotation, onSelect, onPanStart,
                 if (!didPanRef.current) onSelect(i)
               }}
               aria-label={`Ver ${card.title}`}
-              className="group/face relative w-full rounded-2xl bg-white p-1.5 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.45)] outline-none transition-transform duration-200 hover:-translate-y-1 focus-visible:ring-4 focus-visible:ring-ring"
+              className="group/face relative w-full rounded-lg outline-none transition-transform duration-200 select-none hover:-translate-y-1.5 focus-visible:ring-4 focus-visible:ring-ring"
             >
-              <Image
-                src={card.src}
-                alt={card.alt}
-                width={300}
-                height={400}
-                sizes="180px"
-                draggable={false}
-                className="pointer-events-none aspect-[3/4] w-full rounded-xl object-cover"
-              />
+              <span aria-hidden className="tape -top-2.5 left-1/2 z-10 -translate-x-1/2 rotate-[-4deg]" />
+              <span className="pointer-events-none block">{card.content}</span>
             </button>
           </div>
         ))}
@@ -124,7 +119,7 @@ export function ThreeDPhotoCarousel({
   className,
   autoRotate = true,
   ctaLabel = "Lo quiero",
-  ctaHref = "#nuevo",
+  ctaHref = "#de-a-uno",
 }: ThreeDPhotoCarouselProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [isHovered, setIsHovered] = useState(false)
@@ -203,27 +198,22 @@ export function ThreeDPhotoCarousel({
               role="dialog"
               aria-modal="true"
               aria-label={active.title}
-              className="relative w-full max-w-sm rotate-[-1.5deg] rounded-[28px] bg-white p-3 text-ink shadow-2xl"
+              className="relative w-full max-w-[min(22rem,calc((100dvh-9rem)*0.75))] rotate-[-1.5deg]"
               initial={{ scale: 0.6, y: 40, rotate: -8 }}
               animate={{ scale: 1, y: 0, rotate: -1.5 }}
               exit={{ scale: 0.7, y: 30, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={active.src}
-                alt={active.alt}
-                width={600}
-                height={600}
-                sizes="(max-width: 420px) 90vw, 384px"
-                className="aspect-square w-full rounded-[20px] object-cover"
-              />
-              <div className="flex items-end justify-between gap-3 px-2 pt-4 pb-2">
-                <div>
+              <span aria-hidden className="tape -top-3 left-1/2 z-10 w-24 -translate-x-1/2 rotate-[3deg]" />
+              {active.content}
+              <div className="mt-3 flex items-center justify-between gap-3 rounded-md bg-paper px-4 py-3 text-ink shadow-hard">
+                <div className="min-w-0">
                   {active.tag && (
                     <p className="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">{active.tag}</p>
                   )}
-                  <p className="font-display text-2xl font-extrabold">{active.title}</p>
+                  <p className="truncate font-display text-2xl uppercase">{active.title}</p>
+                  {active.meta && <p className="font-mono text-sm text-neutral-600">{active.meta}</p>}
                 </div>
                 <a
                   href={ctaHref}
@@ -263,7 +253,7 @@ export function ThreeDPhotoCarousel({
         <CarouselControl label="Anterior" onClick={() => rotateBy(1)}>
           <ChevronLeft className="size-5" aria-hidden />
         </CarouselControl>
-        <p className="font-mono text-xs tracking-widest text-current/70 uppercase select-none">Arrastrá o tocá un calco</p>
+        <p className="font-mono text-xs tracking-widest text-current/70 uppercase select-none">Arrastrá o tocá una plancha</p>
         <CarouselControl label="Siguiente" onClick={() => rotateBy(-1)}>
           <ChevronRight className="size-5" aria-hidden />
         </CarouselControl>

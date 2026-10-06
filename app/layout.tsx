@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Caveat, Geist, Geist_Mono } from "next/font/google";
+import { Anton, Geist, Geist_Mono, Permanent_Marker } from "next/font/google";
 import { StickerDefs } from "@/components/stickers/sticker-art";
 import { Providers } from "@/components/site/providers";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Anton({
   variable: "--font-display",
   subsets: ["latin"],
+  weight: "400",
 });
 
 const geistSans = Geist({
@@ -19,22 +20,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const hand = Caveat({
+const hand = Permanent_Marker({
   variable: "--font-hand",
   subsets: ["latin"],
-  weight: ["600"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
-  title: "Tema Calcos | Stickers personalizados en vinilo premium",
+  title: "Uknow Calcos | Stickers personalizados en vinilo premium",
   description:
     "Creá el sticker de tu logo, tu mascota o tu idea. Calcos troquelados de vinilo premium, listos en máximo 4 días hábiles y con envíos a todo el país.",
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbf6ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#16181f" },
+    { media: "(prefers-color-scheme: light)", color: "#f1f1ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#141518" },
   ],
 };
 

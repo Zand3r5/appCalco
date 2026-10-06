@@ -13,13 +13,13 @@ export function Logo({ className }: { className?: string }) {
   return (
     <a
       href="#top"
-      aria-label="Tema Calcos, inicio"
+      aria-label="Uknow Calcos, inicio"
       className={cn(
         "group inline-flex items-center gap-1.5 rounded-lg font-display text-xl font-extrabold tracking-tight focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         className
       )}
     >
-      <span>TEMA</span>
+      <span>UKNOW</span>
       <span className="inline-block -rotate-6 rounded-lg border-2 border-white bg-brand px-1.5 leading-tight text-ink shadow-[0_2px_6px_rgb(0_0_0/0.18)] transition-transform duration-200 group-hover:rotate-3">
         calcos
       </span>
@@ -73,7 +73,7 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-1 lg:ml-0">
           <ThemeToggle />
-          <a href="#nuevo" aria-label={`Carrito: ${count} productos`} className={iconButton}>
+          <a href="#de-a-uno" aria-label={`Carrito: ${count} productos`} className={iconButton}>
             <motion.span key={count} animate={count ? { rotate: [0, -14, 10, 0] } : undefined} transition={{ duration: 0.45 }}>
               <ShoppingBag className="size-[18px]" aria-hidden />
             </motion.span>

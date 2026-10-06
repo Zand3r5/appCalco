@@ -8,8 +8,8 @@ const COLUMNS = [
     links: [
       { label: "Personalizados", href: "#personalizados" },
       { label: "Por mayor", href: "#empresas" },
-      { label: "Catálogo", href: "#catalogo" },
-      { label: "Lo nuevo", href: "#nuevo" },
+      { label: "Planchas", href: "#catalogo" },
+      { label: "De a uno", href: "#de-a-uno" },
     ],
   },
   {
@@ -65,8 +65,8 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href="mailto:hola@temacalcos.com.ar" className={`${linkClass} inline-flex items-center gap-2`}>
-                <Mail className="size-4" aria-hidden /> hola@temacalcos.com.ar
+              <a href="mailto:hola@uknowcalcos.com.ar" className={`${linkClass} inline-flex items-center gap-2`}>
+                <Mail className="size-4" aria-hidden /> hola@uknowcalcos.com.ar
               </a>
             </li>
           </ul>
@@ -82,7 +82,7 @@ export function SiteFooter() {
 
       <div className="border-t border-paper/10">
         <div className="shell flex flex-col justify-between gap-2 py-5 text-xs text-paper/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} Tema Calcos. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} Uknow Calcos. Todos los derechos reservados.</p>
           <p>Hecho con ✦ en Argentina</p>
         </div>
       </div>

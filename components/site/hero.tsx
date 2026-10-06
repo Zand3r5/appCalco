@@ -16,14 +16,14 @@ type BoardSticker = {
 
 const BOARD: BoardSticker[] = [
   { kind: "logo", left: "27%", top: "27%", width: "46%", rotate: -4 },
-  { kind: "che", left: "4%", top: "5%", width: "30%", rotate: -10 },
-  { kind: "bolt", left: "40%", top: "3%", width: "19%", rotate: 12 },
-  { kind: "sun", left: "64%", top: "4%", width: "30%", rotate: 8 },
-  { kind: "mate", left: "4%", top: "40%", width: "23%", rotate: 6 },
-  { kind: "flower", left: "75%", top: "38%", width: "21%", rotate: -6 },
+  { kind: "tag", left: "3%", top: "5%", width: "34%", rotate: -10 },
+  { kind: "bolt", left: "41%", top: "3%", width: "19%", rotate: 12 },
+  { kind: "crown", left: "65%", top: "4%", width: "28%", rotate: 8 },
+  { kind: "spray", left: "4%", top: "39%", width: "23%", rotate: 6 },
+  { kind: "drip", left: "75%", top: "38%", width: "21%", rotate: -6 },
   { kind: "badge24", left: "8%", top: "68%", width: "26%", rotate: -8 },
-  { kind: "butterfly", left: "40%", top: "70%", width: "24%", rotate: 4 },
-  { kind: "heart", left: "68%", top: "66%", width: "26%", rotate: 10 },
+  { kind: "flame", left: "41%", top: "70%", width: "22%", rotate: 4 },
+  { kind: "che", left: "67%", top: "67%", width: "28%", rotate: 10 },
 ]
 
 const HEADLINE_SPRING = { type: "spring", stiffness: 220, damping: 20 } as const
@@ -54,11 +54,13 @@ function StickerBoard() {
       <div ref={boardRef} role="img" aria-label="Plancha de stickers de ejemplo que podés arrastrar" className="relative aspect-square">
         <div
           aria-hidden
-          className="absolute inset-[3%] rotate-2 rounded-[36px] border border-border bg-card shadow-[0_40px_80px_-40px_rgb(0_0_0/0.45)]"
+          className="absolute inset-[3%] rotate-2 rounded-md border-2 border-ink bg-card shadow-hard dark:border-border"
         >
-          <div className="absolute inset-4 rounded-[26px] border-2 border-dashed border-foreground/10" />
+          <div className="absolute inset-4 rounded-sm border-2 border-dashed border-foreground/10" />
+          <span className="tape -top-3 left-6 -rotate-12" />
+          <span className="tape -right-4 -bottom-2 rotate-[24deg]" />
           <p className="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.3em] whitespace-nowrap text-muted-foreground uppercase">
-            Plancha N.º 001 · Vinilo premium
+            Plancha N.º 000 · Uknow calcos
           </p>
         </div>
 
@@ -102,17 +104,17 @@ function StickerBoard() {
 
 export function Hero() {
   return (
-    <section id="personalizados" className="relative overflow-hidden bg-cutting-mat">
+    <section id="personalizados" className="bg-concrete relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_75%_40%,color-mix(in_oklch,var(--brand)_22%,transparent),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_45%_at_78%_42%,color-mix(in_oklch,var(--brand)_16%,transparent),transparent_70%)]"
       />
-      <div className="shell relative grid items-center gap-14 pt-10 pb-24 lg:grid-cols-[1.05fr_1fr] lg:pt-16 lg:pb-28">
+      <div className="shell relative grid items-center gap-14 pt-10 pb-16 lg:grid-cols-[1.05fr_1fr] lg:pt-16 lg:pb-20">
         <div>
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 py-1.5 pr-3.5 pl-2 text-xs font-semibold backdrop-blur"
+            initial={{ opacity: 0, y: 10, rotate: -2 }}
+            animate={{ opacity: 1, y: 0, rotate: -2 }}
+            className="inline-flex items-center gap-2 rounded-sm bg-ink px-3 py-1.5 font-mono text-[11px] tracking-[0.2em] text-paper uppercase"
           >
             <span className="relative flex size-2.5">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:animate-none" />
@@ -121,7 +123,7 @@ export function Hero() {
             Producción en 24 a 96 hs
           </motion.p>
 
-          <h1 className="mt-6 font-display text-[3.4rem] leading-[0.92] font-extrabold tracking-[-0.035em] sm:text-7xl xl:text-[5.6rem]">
+          <h1 className="mt-6 font-display text-[4.6rem] leading-[0.86] sm:text-[7rem] xl:text-[8.4rem]">
             <span className="flex flex-wrap gap-x-[0.22em]">
               <Word delay={0.05}>Tu</Word>
               <Word delay={0.13}>logo,</Word>
@@ -129,7 +131,7 @@ export function Hero() {
             <span className="flex flex-wrap items-baseline gap-x-[0.22em]">
               <Word delay={0.21}>hecho</Word>
               <motion.span
-                className="relative inline-block rounded-[0.22em] border-[0.06em] border-white bg-brand px-[0.16em] pb-[0.06em] text-ink shadow-[0_0.08em_0.25em_rgb(0_0_0/0.2)]"
+                className="relative inline-block rounded-[0.1em] border-[0.05em] border-white bg-brand px-[0.12em] text-ink shadow-[0.05em_0.05em_0_0_var(--ink)]"
                 initial={{ opacity: 0, scale: 1.9, rotate: -25 }}
                 animate={{ opacity: 1, scale: 1, rotate: -4 }}
                 whileHover={{ rotate: 3, scale: 1.04 }}
@@ -156,7 +158,7 @@ export function Hero() {
             transition={{ delay: 0.65, duration: 0.5 }}
             className="mt-9 flex flex-wrap items-center gap-4"
           >
-            <CtaLink href="#nuevo" size="lg">
+            <CtaLink href="#de-a-uno" size="lg">
               Diseñá tu sticker
               <ArrowRight aria-hidden />
             </CtaLink>
