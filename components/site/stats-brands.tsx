@@ -4,12 +4,13 @@ import { useEffect, useRef } from "react"
 import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { brands } from "@/lib/data"
+import { siteConfig } from "@/lib/site-config"
 import { Marquee } from "@/components/ui/marquee"
 
 const STATS = [
-  { value: 50, prefix: "+", suffix: "", label: "marcas nos eligen", highlight: true },
-  { value: 4, prefix: "", suffix: " días", label: "hábiles máx. de producción" },
-  { value: 24, prefix: "", suffix: "", label: "provincias con envío" },
+  { value: siteConfig.claims.brandsCount, prefix: "+", suffix: "", label: "marcas nos eligen", highlight: true },
+  { value: siteConfig.delivery.productionMaxBusinessDays, prefix: "", suffix: " días", label: "hábiles máx. de producción" },
+  { value: siteConfig.claims.provincesCount, prefix: "", suffix: "", label: "provincias con envío" },
   { value: 100, prefix: "", suffix: "%", label: "vinilo premium laminado" },
 ]
 

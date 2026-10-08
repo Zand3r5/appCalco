@@ -1,10 +1,14 @@
-import Image from "next/image"
 import type { ReactNode } from "react"
 import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { categoryImages } from "@/lib/data"
+import { sheets } from "@/lib/data"
+import { siteConfig } from "@/lib/site-config"
 import { StickerArt } from "@/components/stickers/sticker-art"
+import { StickerSheet } from "@/components/stickers/sticker-sheet"
 import { Reveal } from "./reveal"
+
+/** Dark sheet so it pops against the light paper tile. */
+const FEATURED_SHEET = sheets.find((sheet) => sheet.id === "fuego") ?? sheets[0]
 
 function BentoLink({ href, className, children }: { href: string; className?: string; children: ReactNode }) {
   return (
@@ -20,6 +24,47 @@ function BentoLink({ href, className, children }: { href: string; className?: st
         <ArrowUpRight className="size-5" aria-hidden />
       </span>
     </a>
+  )
+}
+
+/** Stickers slapped on a street wall: the custom-order hero tile. */
+function StreetWall() {
+  return (
+    <div aria-hidden className="absolute inset-0">
+      <StickerArt
+        kind="tag"
+        shadow={false}
+        className="absolute top-8 left-4 w-40 -rotate-6 transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:-rotate-3 sm:w-52"
+      />
+      <StickerArt
+        kind="logo"
+        shadow={false}
+        className="absolute top-6 right-6 w-36 rotate-6 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-3 sm:w-48"
+      />
+      <StickerArt
+        kind="crown"
+        shadow={false}
+        className="absolute top-[44%] left-[38%] w-20 rotate-12 transition-transform duration-500 ease-out group-hover:rotate-[20deg] sm:w-24"
+      />
+      <StickerArt
+        kind="spray"
+        shadow={false}
+        className="absolute top-[38%] -right-4 w-28 -rotate-12 transition-transform duration-700 ease-out group-hover:-translate-x-2 sm:w-32"
+      />
+    </div>
+  )
+}
+
+/** A themed sheet taped to the tile, tilted and cropped by the edge. */
+function TapedSheet() {
+  return (
+    <div
+      aria-hidden
+      className="absolute top-5 -right-8 w-40 rotate-[9deg] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:rotate-[4deg] sm:w-44"
+    >
+      <span className="tape -top-2.5 left-1/2 z-10 -translate-x-1/2 rotate-[-5deg]" />
+      <StickerSheet sheet={FEATURED_SHEET} variant={1} />
+    </div>
   )
 }
 
@@ -40,23 +85,13 @@ export function CategoriesBento() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[270px_270px]">
         <Reveal className="sm:col-span-2 lg:row-span-2">
-          <BentoLink href="#personalizados" className="min-h-[420px] text-white">
-            <Image
-              src={categoryImages.custom}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-            <StickerArt
-              kind="logo"
-              className="absolute top-6 right-6 w-28 rotate-6 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3 sm:w-36"
-            />
+          <BentoLink href="#personalizados" className="bg-concrete min-h-[420px] bg-ink text-white [--grain-opacity:0.16]">
+            <StreetWall />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
             <div className="relative mt-auto max-w-sm pr-14">
               <span className="inline-block rounded-full bg-pop px-3 py-1 text-xs font-bold text-ink">El más pedido</span>
               <h3 className="mt-3 font-display text-4xl font-extrabold tracking-tight">Personalizados</h3>
-              <p className="mt-2 text-white/80">Tu logo, tu foto o tu idea, troquelado a medida. Desde 10 unidades.</p>
+              <p className="mt-2 text-white/80">Tu logo, tu foto o tu idea, troquelado a medida. Desde {siteConfig.claims.customMinUnits} unidades.</p>
             </div>
           </BentoLink>
         </Reveal>
@@ -75,18 +110,12 @@ export function CategoriesBento() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <BentoLink href="#catalogo" className="min-h-[240px] text-white">
-            <Image
-              src={categoryImages.sheets}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/5" />
+          <BentoLink href="#catalogo" className="bg-concrete min-h-[240px] bg-paper text-ink">
+            <TapedSheet />
+            <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/75 to-transparent" />
             <div className="relative mt-auto pr-12">
               <h3 className="font-display text-2xl font-extrabold tracking-tight">Planchas temáticas</h3>
-              <p className="mt-1 text-sm text-white/80">Muchos calcos, una sola plancha.</p>
+              <p className="mt-1 text-sm text-ink/75">Muchos calcos, una sola plancha.</p>
             </div>
           </BentoLink>
         </Reveal>

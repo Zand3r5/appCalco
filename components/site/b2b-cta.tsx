@@ -1,11 +1,12 @@
 import { Check, Mail, MessageCircle } from "lucide-react"
-import { WHATSAPP_URL } from "@/lib/data"
+import { siteConfig, whatsappLink } from "@/lib/site-config"
 import { StickerArt } from "@/components/stickers/sticker-art"
 import { CtaLink } from "@/components/ui/cta-link"
 import { Reveal } from "./reveal"
 
 const PERKS = ["Asesoramiento de diseño sin cargo", "Precios por volumen", "Entrega con fecha acordada"]
-const WHATSAPP_B2B = `${WHATSAPP_URL}?text=${encodeURIComponent("¡Hola! Quiero un presupuesto para un pedido por mayor.")}`
+const WHATSAPP_B2B = whatsappLink("¡Hola! Quiero un presupuesto para un pedido por mayor.")
+const SALES_MAILTO = `mailto:${siteConfig.contact.emailSales}?subject=${encodeURIComponent("Presupuesto por mayor")}`
 
 export function B2BCta() {
   return (
@@ -47,7 +48,7 @@ export function B2BCta() {
                 Hablemos por WhatsApp
               </CtaLink>
               <CtaLink
-                href="mailto:ventas@uknowcalcos.com.ar?subject=Presupuesto%20por%20mayor"
+                href={SALES_MAILTO}
                 size="lg"
                 variant="outline"
                 className="border-ink text-ink hover:bg-ink hover:text-paper"

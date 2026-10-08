@@ -102,12 +102,16 @@ Son sprints de una semana. Cada uno termina con deploy en Vercel, `tsc`, lint y 
 
 ### Sprint 0: limpieza y base (2–3 días)
 
-- [ ] Reemplazar los datos falsos: WhatsApp, Instagram, mails, marcas y testimonios (o sacarlos).
-- [ ] Unificar los plazos y sacar las cifras sin respaldo ("+50 marcas", "24 provincias", "al mundo").
-- [ ] Reemplazar las fotos de Unsplash de categorías por fotos propias o por arte SVG.
-- [ ] Instalar Vitest y Playwright y escribir un primer test de humo de la home.
-- [ ] Crear `.env.example`, conectar el repo a Vercel y armar un README real.
-- [ ] Quitar las dependencias de más (`cn` y `shadcn` en `dependencies`).
+- [x] Centralizar los datos mock: WhatsApp, Instagram, mails, marcas, testimonios en `lib/site-config.ts` y `lib/data.ts`. Marcados con `// MOCK:`. Quedan así hasta que el dueño brinde datos reales y cambie `siteConfig.isMock = false`.
+- [x] Unificar los plazos en un solo valor (`siteConfig.delivery`). Las cifras sin respaldo ("+50 marcas", "24 provincias", "al mundo", "10% OFF") no se borraron: quedan centralizadas como mock en `siteConfig.claims` hasta confirmarlas.
+- [x] Navegación como objetos en `lib/navigation.ts` (`mainNav`, `footerNav`, `legalLinks`, `legalPages`, `footerInfo`) con tests: barra con desplegables, menú mobile, skip-link y footer con datos del negocio, legales y copyright.
+- [x] Buscador (`lib/search.ts`, con TDD): sin tildes ni mayúsculas, plurales, todas las palabras; se abre con Ctrl+K desde el header.
+- [x] Páginas legales mock en `/legales/[slug]`, con Botón de arrepentimiento y link a Defensa del Consumidor.
+- [x] Reemplazar las fotos de Unsplash de categorías por arte SVG in-house.
+- [x] Instalar Vitest y Playwright y escribir un primer test de humo de la home.
+- [x] Crear `.env.example` y armar un README real.
+- [x] `cn` y `shadcn` están EN USO: re-exportados en `lib/utils.ts` y `app/globals.css` importa `shadcn/tailwind.css`. Se mantienen porque son fundamentales para el sistema de estilos.
+- [ ] Conectar el repo a Vercel (acción pendiente del dueño; ver README).
 
 Agentes: `catalog-manager` (datos), `street-ui-reviewer`, `doc-updater` (README).
 

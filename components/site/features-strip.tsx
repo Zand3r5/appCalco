@@ -1,9 +1,10 @@
 import { Clock, CreditCard, Droplets, Truck } from "lucide-react"
 import { Marquee } from "@/components/ui/marquee"
+import { siteConfig } from "@/lib/site-config"
 
 const FEATURES = [
-  { icon: Truck, title: "Envíos a todo el país y al mundo" },
-  { icon: Clock, title: "Listos en máx. 4 días hábiles" },
+  { icon: Truck, title: siteConfig.delivery.shippingLabel },
+  { icon: Clock, title: siteConfig.delivery.productionLabel },
   { icon: CreditCard, title: "Todos los medios de pago" },
   { icon: Droplets, title: "Vinilo premium: agua, sol y rayones" },
 ]

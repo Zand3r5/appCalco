@@ -1,9 +1,7 @@
 import { Star } from "lucide-react"
-import { testimonials } from "@/lib/data"
+import { testimonials, type Testimonial } from "@/lib/data"
 import { Marquee } from "@/components/ui/marquee"
 import { Reveal } from "./reveal"
-
-type Testimonial = (typeof testimonials)[number]
 
 const AVATAR_TINTS = ["bg-brand", "bg-pop", "bg-accent"]
 
@@ -25,7 +23,7 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
         </span>
         <span>
           <span className="block font-semibold">{item.name}</span>
-          <span className="block font-mono text-xs text-muted-foreground">{item.handle}</span>
+          <span className="block font-mono text-xs text-muted-foreground">{item.city}</span>
         </span>
       </figcaption>
     </figure>
@@ -39,7 +37,7 @@ export function Testimonials() {
   return (
     <section id="opiniones" aria-labelledby="opiniones-title" className="overflow-hidden pb-20 sm:pb-28">
       <Reveal className="shell max-w-2xl text-center">
-        <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">Opiniones reales</p>
+        <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">Opiniones</p>
         <h2 id="opiniones-title" className="mt-3 font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
           Clientes felices, calcos pegados.
         </h2>
@@ -49,7 +47,7 @@ export function Testimonials() {
         {rows.map((row, r) => (
           <Marquee key={r} duration={55 + r * 10} gap="1rem" reverse={r === 1} pauseOnHover>
             {row.map((item, i) => (
-              <TestimonialCard key={item.handle} item={item} index={i + r} />
+              <TestimonialCard key={item.name} item={item} index={i + r} />
             ))}
           </Marquee>
         ))}

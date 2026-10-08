@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Star } from "lucide-react"
 import { StickerArt, type StickerKind } from "@/components/stickers/sticker-art"
 import { CtaLink } from "@/components/ui/cta-link"
+import { siteConfig } from "@/lib/site-config"
 
 type BoardSticker = {
   kind: StickerKind
@@ -120,7 +121,7 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-75 motion-reduce:animate-none" />
               <span className="relative inline-flex size-2.5 rounded-full bg-brand" />
             </span>
-            Producción en 24 a 96 hs
+            {siteConfig.delivery.productionLabel}
           </motion.p>
 
           <h1 className="mt-6 font-display text-[4.6rem] leading-[0.86] sm:text-[7rem] xl:text-[8.4rem]">
@@ -180,7 +181,7 @@ export function Hero() {
               ))}
             </span>
             <span className="text-muted-foreground">
-              <strong className="font-semibold text-foreground">+50 marcas</strong> y cientos de clientes felices
+              <strong className="font-semibold text-foreground">{`+${siteConfig.claims.brandsCount} marcas`}</strong> y cientos de clientes felices
             </span>
           </motion.a>
         </div>

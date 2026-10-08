@@ -1,10 +1,11 @@
 import { Marquee } from "@/components/ui/marquee"
+import { siteConfig } from "@/lib/site-config"
 
 const MESSAGES = [
-  "Envíos a todo el país y al mundo",
-  "Listos en máx. 4 días hábiles",
-  "Personalizados desde 10 unidades",
-  "10% OFF pagando por transferencia",
+  siteConfig.delivery.shippingLabel,
+  siteConfig.delivery.productionLabel,
+  `Personalizados desde ${siteConfig.claims.customMinUnits} unidades`,
+  `${siteConfig.claims.transferDiscountPercent}% OFF pagando por transferencia`,
   "Vinilo premium resistente al agua",
 ]
 

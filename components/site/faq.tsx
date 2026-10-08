@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react"
-import { WHATSAPP_URL, faqs } from "@/lib/data"
+import { faqs } from "@/lib/data"
+import { siteConfig } from "@/lib/site-config"
 import { Reveal } from "./reveal"
 
 export function Faq() {
@@ -13,7 +14,7 @@ export function Faq() {
         <p className="mt-5 text-muted-foreground">
           ¿Te quedó alguna duda?{" "}
           <a
-            href={WHATSAPP_URL}
+            href={siteConfig.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-foreground underline decoration-brand decoration-2 underline-offset-4"

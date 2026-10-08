@@ -1,9 +1,7 @@
 import type { StickerKind } from "@/components/stickers/sticker-art"
+import { siteConfig } from "@/lib/site-config"
 
-export const WHATSAPP_URL = "https://wa.me/5491100000000"
-
-const unsplash = (id: string, size = 600) =>
-  `https://images.unsplash.com/photo-${id}?w=${size}&h=${size}&fit=crop&auto=format&q=75`
+const { productionMaxBusinessDays, shippingLabel } = siteConfig.delivery
 
 export type Sheet = {
   id: string
@@ -32,12 +30,6 @@ export const sheets: Sheet[] = [
   { id: "tu-marca", code: "010", name: "Tu Marca", vibe: "Personalizada", stickers: ["logo", "badge24", "tag", "star", "bolt", "heart"], price: 7900, backing: "#f4f4f1" },
 ]
 
-export const categoryImages = {
-  custom: unsplash("1714859100552-3e432e8f3981", 900),
-  wholesale: unsplash("1543123452-278551b0e9a7", 700),
-  sheets: unsplash("1633533452206-8ab246b00e30", 700),
-} as const
-
 export type Product = {
   id: string
   name: string
@@ -65,40 +57,40 @@ export const products: Product[] = [
 
 export const steps = [
   { n: "01", title: "Subí tu diseño", body: "Logo, foto de tu mascota o una idea en una servilleta. Nosotros lo convertimos en calco listo para imprimir." },
-  { n: "02", title: "Elegí tamaño y cantidad", body: "Desde 10 unidades. Troquelado, circular o cuadrado, en vinilo mate o brillante resistente al agua." },
-  { n: "03", title: "Lo recibís en tu casa", body: "Producimos en máximo 4 días hábiles y enviamos a todo el país y al mundo." },
+  { n: "02", title: "Elegí tamaño y cantidad", body: `Desde ${siteConfig.claims.customMinUnits} unidades. Troquelado, circular o cuadrado, en vinilo mate o brillante resistente al agua.` },
+  {
+    n: "03",
+    title: "Lo recibís en tu casa",
+    body: `Producimos en máximo ${productionMaxBusinessDays} días hábiles. ${shippingLabel}.`,
+  },
 ] as const
 
-export const testimonials = [
-  { name: "Aylen V.", handle: "@aylenvargas", text: "Los stickers personalizados me enamoraron. Es la segunda vez que compro y voy a ir por más. ¡A mi familia le encantaron!" },
-  { name: "Vicky L.", handle: "@vickyllove", text: "Siempre cumplen: calidad, entrega y atención. Pedirlos personalizados es súper práctico y las planchas temáticas son un 10." },
-  { name: "Patry P.", handle: "@patrypiaggi", text: "Mandé las fotos que quería y los hicieron divinos. Rápido, seguro y me los entregaron en casa. ¡Excelente todo!" },
-  { name: "Clara F.", handle: "@clarifeal", text: "Superaron mis expectativas. Compré 100 para mi estudio de body piercing y son espectaculares, un 20/10." },
-  { name: "Aixa D.", handle: "@aixadepas", text: "La calidad es un diez: tienen relieve y colores re lindos. Hice personalizados y llegaron rapidísimo." },
-  { name: "Carlos C.", handle: "@carloscarabba", text: "Pedí calcos de 3 modelos para mi banda y quedaron espectaculares. Gran terminación y excelente calidad." },
-  { name: "Alfredo C.", handle: "@alfredocunti", text: "Súper fácil pedir por la web y por WhatsApp me resolvieron todo. Pedí desde Río Negro y llegó rapidísimo." },
-] as const
+export type Testimonial = { name: string; city: string; text: string }
 
-// Placeholder client names — replace with real brand logos once licensed.
+// MOCK: fictitious testimonials for layout only. Replace with real, consented customer reviews before launch.
+export const testimonials: readonly Testimonial[] = [
+  { name: "Martina G.", city: "Córdoba", text: "Pedí calcos con el logo de mi emprendimiento y quedaron re prolijos. El vinilo se siente de buena calidad." },
+  { name: "Julián R.", city: "Rosario", text: "Los pegué en la notebook y en el termo. Después de varias lavadas siguen intactos." },
+  { name: "Sofía B.", city: "Mendoza", text: "Me ayudaron a ajustar el diseño antes de imprimir. La plancha temática es hermosa." },
+  { name: "Tomás L.", city: "La Plata", text: "Encargué para la banda y los repartimos en el show. Colores fuertes y buen troquelado." },
+  { name: "Camila F.", city: "Mar del Plata", text: "Súper simple pedir por WhatsApp. Me respondieron rápido y llegaron bien embalados." },
+  { name: "Nicolás P.", city: "Salta", text: "Compré de a uno para probar y ya volví por una plancha completa. Muy buena terminación." },
+  { name: "Lucía M.", city: "Neuquén", text: "Los usé para los packs de mi tienda y a mis clientas les encantaron. Voy a repetir." },
+]
+
+// MOCK: placeholder client names. Replace with real brand logos once licensed.
 export const brands = [
   "Café Ronda", "Estudio Norte", "La Birra Club", "Mostaza Studio", "Barrio Fit",
   "Tinta Viva", "Pampa Records", "Kiosco Pop", "Ruta 40 Bikes", "Mila & Co",
 ] as const
 
 export const faqs = [
-  { q: "¿Cuál es el mínimo de compra?", a: "Los personalizados arrancan desde 10 unidades. Los stickers de catálogo se venden por unidad." },
+  { q: "¿Cuál es el mínimo de compra?", a: `Los personalizados arrancan desde ${siteConfig.claims.customMinUnits} unidades. Los stickers de catálogo se venden por unidad.` },
   { q: "¿Son resistentes al agua y al sol?", a: "Sí. Usamos vinilo premium con laminado que resiste agua, rayones y rayos UV. Ideales para termos, notebooks y autos." },
-  { q: "¿En cuánto tiempo tengo mi pedido?", a: "Producimos en un máximo de 4 días hábiles desde que aprobás el diseño. El envío depende de tu ubicación." },
+  { q: "¿En cuánto tiempo tengo mi pedido?", a: `Producimos en un máximo de ${productionMaxBusinessDays} días hábiles desde que aprobás el diseño. El envío depende de tu ubicación.` },
   { q: "¿Hacen pedidos grandes para empresas?", a: "Sí, trabajamos con marcas, agencias y organizaciones. Escribinos y te armamos un presupuesto con fecha de entrega." },
 ] as const
 
-export const navLinks = [
-  { label: "Personalizados", href: "#personalizados" },
-  { label: "Por mayor", href: "#empresas" },
-  { label: "Planchas", href: "#catalogo" },
-  { label: "De a uno", href: "#de-a-uno" },
-  { label: "Preguntas", href: "#faq" },
-] as const
 
 export const formatARS = (value: number) =>
   new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }).format(value)

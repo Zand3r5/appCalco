@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, Geist, Geist_Mono, Permanent_Marker } from "next/font/google";
 import { StickerDefs } from "@/components/stickers/sticker-art";
 import { Providers } from "@/components/site/providers";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const display = Anton({
@@ -27,9 +28,8 @@ const hand = Permanent_Marker({
 });
 
 export const metadata: Metadata = {
-  title: "Uknow Calcos | Stickers personalizados en vinilo premium",
-  description:
-    "Creá el sticker de tu logo, tu mascota o tu idea. Calcos troquelados de vinilo premium, listos en máximo 4 días hábiles y con envíos a todo el país.",
+  title: `${siteConfig.brandName} | Stickers personalizados en vinilo premium`,
+  description: `Creá el sticker de tu logo, tu mascota o tu idea. Calcos troquelados de vinilo premium. ${siteConfig.delivery.productionLabel}. ${siteConfig.delivery.shippingLabel}.`,
 };
 
 export const viewport: Viewport = {

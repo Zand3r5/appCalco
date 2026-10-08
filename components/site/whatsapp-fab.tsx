@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { MessageCircle } from "lucide-react"
-import { WHATSAPP_URL } from "@/lib/data"
+import { siteConfig } from "@/lib/site-config"
 
 const SHOW_AFTER_PX = 600
 
@@ -21,7 +21,7 @@ export function WhatsAppFab() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={WHATSAPP_URL}
+          href={siteConfig.contact.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Escribinos por WhatsApp"

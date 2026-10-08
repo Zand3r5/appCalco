@@ -112,11 +112,11 @@ const ART: Record<StickerKind, ReactNode> = {
     <g>
       <polygon points={radial(16, 72, 90)} fill="#ffd23f" {...STROKE} />
       <circle cx="100" cy="100" r="58" fill={INK} />
-      <text x="100" y="86" textAnchor="middle" fontFamily={DISPLAY_FONT} fontWeight="700" fontSize="14" letterSpacing="2" fill="#ffd23f">
-        LISTO EN
+      <text x="100" y="84" textAnchor="middle" fontFamily={DISPLAY_FONT} fontSize="16" letterSpacing="3" fill="#ffd23f">
+        CALIDAD
       </text>
-      <text x="100" y="126" textAnchor="middle" fontFamily={DISPLAY_FONT} fontWeight="800" fontSize="40" fill="#fff">
-        24HS
+      <text x="100" y="130" textAnchor="middle" fontFamily={DISPLAY_FONT} fontSize="48" letterSpacing="1" fill="#fff">
+        PRO
       </text>
     </g>
   ),

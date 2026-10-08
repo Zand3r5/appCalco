@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <AnnouncementBar />
       <SiteHeader />
-      <main>
+      <main id="contenido">
         <Hero />
         <FeaturesStrip />
         <CarouselSection />
